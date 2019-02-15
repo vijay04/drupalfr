@@ -1,0 +1,26 @@
+parameters:
+  charset: 'UTF-8'
+
+services:
+  context:
+    class: Symfony\Component\Routing\RequestContext
+  matcher:
+    class: Symfony\Component\Routing\Matcher\UrlMatcher
+    arguments: ['%routes%', '@context']
+  request_stack:
+    class: Symfony\Component\HttpFoundation\RequestStack
+  controller_resolver:
+    class: Symfony\Component\HttpKernel\Controller\ControllerResolver
+  argument_resolver:
+    class: Symfony\Component\HttpKernel\Controller\ArgumentResolver
+  listener.router:
+    class: Symfony\Component\HttpKernel\EventListener\RouterListener
+    arguments: ['@matcher', '@request_stack']
+  dispatcher:
+    class: Symfony\Component\EventDispatcher\EventDispatcher
+    calls:
+      - [addSubscriber, ['@listener.router']]
+      - [addSubscriber, ['@listener.string_response']]
+  http_kernel:
+    class: Symfony\Component\HttpKernel\HttpKernel
+    arguments: ['@dispatcher', '@controller_resolver', '@request_stack', '@argument_resolver']

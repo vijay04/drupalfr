@@ -1,0 +1,3 @@
+user_login:
+  path:     /user/login
+  defaults: { _controller: 'Drupal\user\Controller\User::login' }

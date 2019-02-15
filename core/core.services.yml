@@ -1,0 +1,3 @@
+services:
+  listener.string_response:
+    class: Drupal\Core\StringResponseListener

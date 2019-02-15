@@ -1,0 +1,3 @@
+route1:
+  path:     /is_leap_year
+  defaults: { _controller: 'Drupal\calendar\LeapYearController::view' }

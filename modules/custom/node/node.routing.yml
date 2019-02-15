@@ -1,0 +1,3 @@
+node_listing:
+  path:     /node
+  defaults: { _controller: 'Drupal\node\Controller\NodeListing::index' }
